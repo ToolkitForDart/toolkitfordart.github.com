@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Toolkit for Dart for Adobe Flash Professional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/styles.min.css" rel="stylesheet">
+
+    <!-- Fav and touch icons
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+  </head>
+
+  <body>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="getting-started.html">Getting started</a></li>
+          <li class="active"><a href="learn.html">Learn more</a></li>
+        </ul>
+        <h3 class="muted"><img src="img/icon-stagexl.png" width="32"/>Toolkit for Dart</h3>
+      </div>
+
+      <hr>
+
+      <h1>Learn More</h1>
+	  
+      <div class="row-fluid learn">
+		<h4>tl;dr</h4>
+		<p>This is no magic; some things work, some don’t:</p>
+		<ul>
+			<li>Code is not converted,</li>
+			<li>Images are pretty fast,</li>
+			<li>Filters are slow and sparsely supported,</li>
+			<li>Vectors are slow and generate lots of code,</li>
+			<li>You must learn new optimization tricks (see below).</li>
+		</ul>
+		<p><em>(seriously, take the time to read what follows)</em></p>
+
+		<hr/>
+		<ul>
+		  <li><a href="#swcworkflow">That’s the SWC workflow for HTML5!</a></li>
+		  <li><a href="#tips">Tips &amp; tricks</a></li>
+		  <li><a href="#howitworks">How does the toolkit work</a></li>
+		  <li><a href="#performance">Performance and size considerations</a></li>
+		</ul>
+		
+		<h4 id="swcworkflow">That’s the SWC workflow for HTML5!</h4>
+		<p>In Flash development, the SWC workflow consists to export a SWC library of graphical assets from Flash Professional and to link it in an ActionScript project. This is a very popular and productive way to work as you benefit from a nice separation of design and code, and code completion for your library symbols in ActionScript IDEs.</p>
+		<p>The Toolkit for Dart brings back this comfort for HTML5 development:</p> 
+		<ul>
+			<li>it will generate a perfectly clean, efficient, and code completion-friendly Dart library,</li>
+			<li>you can iterate between code and design as in the SWC workflow.</li>
+		</ul>
+		
+		<h4 id="tips">Tips &amp; tricks</h4>
+		<ul>
+			<li>Set "Cache as Bitmap" in Flash Pro for best performance when using complex static symbols,</li>
+			<li>MovieClips do not play when they are cached or not attached on the stage.</li>
+			<li>Don't break text appart and use web fonts (no support for font embedding).</li>
+			<li>PNGs are automatically combined into atlases, unless they are too large or contain "@1x" in their name (configure in the toolkit panel settings),</li>
+			<li>Images ending with @1x.ext are automatically substitued by @2x.ext when the canvas is high-dpi,</li>
+			<li>For mobile you may want to disable the high-dpi canvas: set <code>Stage.autoHighDpi = false;</code> before creating the stage instance.</li>
+		</ul>
+		
+		<h4 id="howitworks">How does the toolkit work</h4>
+		<p>The Toolkit for Dart creates a fully functional and cleanly organized Dart project, leveraging the StageXL library to reproduce the Flash runtime features inside an HTML5 Canvas object.</p>
+
+		<h5>About the generated symbols library:</h5>
+		<ul>
+			<li>The main timeline and symbols with a class linkage OR present on the timeline are exported as Dart classes,</li>
+			<li>All the embedded images and sounds are exported (and preloaded) regardless of their usage,</li>
+			<li>Sounds are exported as MP3s, </li>
+			<li>Lossy images are exported as JPEGs,</li>
+			<li>Lossless images are combined into PNG atlases (by default) or PNGs,</li>
+			<li>A preloader is generated to easily preload all the images and sounds.</li>
+		</ul>
+
+		<h5>Supported features:</h5>
+		<ul>
+			<li>Images,</li>
+			<li>Shapes (static and tweened): 
+			<ul>
+				<li>all stroke styles, custom caps and joints; but all strokes are solid (no dots),</li>
+				<li>all fill styles; but circular gradients are always circular (no ellipse),</li>
+			</ul></li>
+			<li>(imbricated) MovieClips and Graphics timelines, with one constraint: you should not change an instance's type (MovieClip VS Graphic) during its lifetime as different instances will be created,</li>
+			<li>Classic tweens and motion guides,</li>
+			<li>SimpleButtons – only with one frame per state,</li>
+			<li>TextFields: all texts are generated as dynamic TextFields ('input' is in progress),</li>
+			<li>Drop-shadow and Glow filters (not animated),</li>
+			<li>Additive blend mode,</li>
+			<li>'visible' and 'cacheAsBitmap' display options (Properties panel),</li>
+			<li>Single-shape masks,</li>
+			<li>Timeline sound events,</li>
+			<li>Timeline scripts:
+			<ul>
+				<li>You can write Dart code on the timeline as frame actions,</li>
+				<li>To differentiate Dart code from ActionScript, it must be enclosed in a block comment starting with <code>/* js</code>:</li>
+			</ul></li>
+		</ul>
+<pre>
+/* js
+// user Dart code, synchronized with the symbol's timeline
+gotoAndPlay("hello");          // 'this.' is implicit like in AS3
+gotoAndPlay(0);                // frames index start at 0
+someChild.gotoAndPlay("anim"); // child instances can be targeted
+*/
+</pre>
+
+		<h5>MovieClip differences compared to Flash:</h5>
+		<ul>
+			<li>Timeline frames index start at 0 instead of 1,</li>
+			<li>MovieClip animations stop completely as soon as they are removed from the display list,</li>
+			<li>MovieClip instances have a 'frameRate' property to change their speed independently (not recursive).</li>
+		</ul>
+
+		<h5>Notable UNsupported features:</h5>
+		<ul>
+			<li>Motion tweens,</li>
+			<li>Animated MovieClips as masks,</li>
+			<li>Scale9grid,</li>
+			<li>Custom base classes,</li>
+			<li>Most filters but shadows (Canvas limitation),</li>
+			<li>Supported filters are not animated,</li>
+			<li>Most blend modes but additive (Canvas limitation),
+			<li>Some TextField options (Canvas limitation) and Fonts embedding,</li>
+			<li>Synchronized sound (only events play).</li>
+		</ul>
+
+		<h5>The problem with filters:</h5>
+		<ul>
+			<li>Aside from being limited to shadows (drop-shadow, glow),</li>
+			<li>shadows affect independently each child element of a symbol;</li>
+			<li>the solution is to enable cacheAsBitmap on the element (cf. performance considerations).</li>
+		</ul>
+		
+		<h4 id="performance">Performance and size considerations</h4>
+		<p>The HTML5 Canvas is quite efficient, and the generated code aims to offer a reasonable balance between readability and efficiency.</p>
+		<p>However it is important to note that what is optimal for Flash is not necessarily ideal for the toolkit output - you will have to experiment to get the best of what the toolkit can offer.</p>
+		<p>In any case, control the generated Dart library code: it’s easy to identify that a symbol with tens or thousands of shape children will be a performance (and code size) problem.</p>
+		<p><em>Don’t be affraid by the final JavaScript size: nowadays scripts are always served gzipped by the servers, so always evaluate the final weight after minifying and compressing your JavaScript.</em></p>
+
+		<h5>Optimizing Images output:</h5>
+		<ul>
+			<li>The images exported by the toolkit are not optimized, it is important to take care of optimizing them before deploying using tools like <a href="http://pngquant.org/">pngquant</a> which can reduce a PNG's size by 50-75%.</li>
+			<li>Don't hesitate to use lots of PNGs as those are combined into atlases (spritesheets).</li>
+		</ul>
+
+		<h5>Optimizing Shapes output:</h5>
+		<ul>
+			<li>Vector shapes are exported as "scripted drawing instructions", which is considerably slower to render than what the Flash player is able to - make sure to simplify and cache shapes,</li>
+			<li>One vector shape can be very complex but not too heavy thanks to a special "packaged" format to represent the vertices,</li>
+			<li>However, a rich, colorful, scene with many small shapes will generate a large amount of code; "breaking apart" a vector illustration makes things worse.</li>
+			<li>Beware of Shape Tweens: each frame will correspond to a complete new drawing.</li>
+		</ul>
+
+		<h5>Optimizing performance with 'cacheAsBitmap':</h5>
+		<ul>
+			<li>You can set 'Display > Render > Cache As Bitmap' in the Properties panel for any symbol instance on a timeline,</li>
+			<li>When cached, the symbol becomes as fast as a Bitmap to render:
+			<ul>
+				<li>The symbol is drawn in a temporary canvas at scale 1,</li>
+				<li>The cache never updates automatically,</li>
+				<li>Timelines do not play, </li>
+				<li>Transformations (scale, rotation, alpha) can be applied freely,</li>
+				<li>If you zoom the symbol, vectors will look blurry as would be a scaled-up image.</li>
+			</ul></li>
+			<li>This cache can be set from Dart code using the .applyCache method.</li>
+			<li>WARNING: each cached instance corresponds to a distinct Canvas object. Displaying thousands of distinct images or canvases will make the performance collapse. Instead, like in Flash, create Bitmap instances sharing the same BitmapData.</li>
+		</ul>
+
+		<h5>Optimizing Text:</h5>
+		<ul>
+			<li><strong>Do not break text appart</strong>, it generates very heavy and slow vector shapes.</li>
+			<li>Displaying text is usually quite efficient because StageXL TextFields are always rendered in a temporary Bitmap (see notes on 'cacheAsBitmap'),</li>
+			<li>The shortcoming of this method is that scaled-up text will look blurry. You can cheat by scaling down a text element with a larger font size.</li>
+		</ul>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p></p>
+      </div>
+
+    </div>
+
+    <a class="forkme" href="https://github.com/ToolkitForDart/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  </body>
+</html>

@@ -40,10 +40,14 @@
       </div>
 
       <div class="actions">
-        <a class="btn btn-large" href="faq.html">FAQ</a>
-        <a class="btn btn-large btn-warning" href="getting-started.html">Getting started</a>
-        <a class="btn btn-large btn-danger btn-learn" href="learn.html">Learn more</a>
-        <a class="btn btn-large btn-info btn-demo" href="demo/">Play the demo</a>
+        <a class="btn btn-large" href="faq.html"
+          onclick="ga('send', 'event', 'link-faq', 'clicked')">FAQ</a>
+        <a class="btn btn-large btn-warning" href="getting-started.html"
+          onclick="ga('send', 'event', 'link-start', 'clicked')">Getting started</a>
+        <a class="btn btn-large btn-danger btn-learn" href="learn.html"
+          onclick="ga('send', 'event', 'link-learn', 'clicked')">Learn more</a>
+        <a class="btn btn-large btn-info btn-demo" href="demo/"
+          onclick="ga('send', 'event', 'link-demo', 'clicked')">Play the demo</a>
       </div>
 
       <div class="row-fluid marketing">

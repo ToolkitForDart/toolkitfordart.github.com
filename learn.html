@@ -40,7 +40,7 @@
 		<h4>tl;dr</h4>
 		<p>This is no magic; some things work, some don’t:</p>
 		<ul>
-			<li>Code is not converted,</li>
+			<li>ActionScript code is not converted, but there's a trick to add Dart code in frame actions,</li>
 			<li>Images are pretty fast,</li>
 			<li>Filters are slow and sparsely supported,</li>
 			<li>Vectors are slow and generate lots of code,</li>
@@ -57,7 +57,7 @@
 		</ul>
 		
 		<h4 id="swcworkflow">That’s the SWC workflow for HTML5!</h4>
-		<p>In Flash development, the SWC workflow consists to export a SWC library of graphical assets from Flash Professional and to link it in an ActionScript project. This is a very popular and productive way to work as you benefit from a nice separation of design and code, and code completion for your library symbols in ActionScript IDEs.</p>
+		<p>In Flash development, the SWC workflow consists of exporting a SWC library of graphical assets from Flash Professional and linking it in an ActionScript project. This is a very popular and productive way to work as you benefit from a nice separation of design and code, and code completion for your library symbols in ActionScript IDEs.</p>
 		<p>The Toolkit for Dart brings back this comfort for HTML5 development:</p> 
 		<ul>
 			<li>it will generate a perfectly clean, efficient, and code completion-friendly Dart library,</li>
@@ -95,7 +95,7 @@
 				<li>all stroke styles, custom caps and joints; but all strokes are solid (no dots),</li>
 				<li>all fill styles; but circular gradients are always circular (no ellipse),</li>
 			</ul></li>
-			<li>(imbricated) MovieClips and Graphics timelines, with one constraint: you should not change an instance's type (MovieClip VS Graphic) during its lifetime as different instances will be created,</li>
+			<li>(nested) MovieClips and Graphics timelines, with one constraint: you should not change an instance's type (MovieClip VS Graphic) during its lifetime as different instances will be created,</li>
 			<li>Classic tweens and motion guides,</li>
 			<li>SimpleButtons – only with one frame per state,</li>
 			<li>TextFields: all texts are generated as dynamic TextFields ('input' is in progress),</li>
@@ -128,10 +128,10 @@ someChild.gotoAndPlay("anim"); // child instances can be targeted
 
 		<h5>Notable UNsupported features:</h5>
 		<ul>
-			<li>Motion tweens,</li>
+			<li>Motion tweens (as opposed to Classic tweens),</li>
 			<li>Animated MovieClips as masks,</li>
 			<li>Scale9grid,</li>
-			<li>Custom base classes,</li>
+			<li>Document class, symbol base classes,</li>
 			<li>Most filters but shadows (Canvas limitation),</li>
 			<li>Supported filters are not animated,</li>
 			<li>Most blend modes but additive (Canvas limitation),

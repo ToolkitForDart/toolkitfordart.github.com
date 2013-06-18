@@ -67,10 +67,11 @@
 		<h4 id="tips">Tips &amp; tricks</h4>
 		<ul>
 			<li>Set "Cache as Bitmap" in Flash Pro for best performance when using complex static symbols,</li>
+			<li>Unlike in Flash, "Cache as Bitmap" creates a temporary image that doesn't automatically update,</li>
 			<li>MovieClips do not play when they are cached or not attached on the stage.</li>
 			<li>Don't break text appart and use web fonts (no support for font embedding).</li>
-			<li>PNGs are automatically combined into atlases, unless they are too large or contain "@1x" in their name (configure in the toolkit panel settings),</li>
-			<li>Images ending with @1x.ext are automatically substitued by @2x.ext when the canvas is high-dpi,</li>
+			<li>PNGs are automatically combined into atlases, unless they are too large or contain "@1x" in their name (see toolkit panel settings),</li>
+			<li>Images ending with @1x.png are automatically substitued by @2x.png when the canvas is high-dpi,</li>
 			<li>For mobile you may want to disable the high-dpi canvas: set <code>Stage.autoHighDpi = false;</code> before creating the stage instance.</li>
 		</ul>
 		
@@ -83,7 +84,7 @@
 			<li>All the embedded images and sounds are exported (and preloaded) regardless of their usage,</li>
 			<li>Sounds are exported as MP3s, </li>
 			<li>Lossy images are exported as JPEGs,</li>
-			<li>Lossless images are combined into PNG atlases (by default) or PNGs,</li>
+			<li>Lossless images are combined into PNG atlases (by default and when appropriate) or PNGs,</li>
 			<li>A preloader is generated to easily preload all the images and sounds.</li>
 		</ul>
 

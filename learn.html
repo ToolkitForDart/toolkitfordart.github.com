@@ -44,7 +44,8 @@
 			<li>Images are pretty fast,</li>
 			<li>Filters are slow and sparsely supported,</li>
 			<li>Vectors are slow and generate lots of code,</li>
-			<li>You must learn new optimization tricks (see below).</li>
+			<li>You must learn new optimization tricks (see below),</li>
+			<li>To publish an optimized Dart project for the web, use: <em>Tools > Pub Deploy</em> in DartEditor</li>
 		</ul>
 		<p><em>(seriously, take the time to read what follows)</em></p>
 
@@ -187,6 +188,12 @@ someChild.gotoAndPlay("anim"); // child instances can be targeted
 			<li><strong>Do not break text appart</strong>, it generates very heavy and slow vector shapes.</li>
 			<li>Displaying text is usually quite efficient because StageXL TextFields are always rendered in a temporary Bitmap (see notes on 'cacheAsBitmap'),</li>
 			<li>The shortcoming of this method is that scaled-up text will look blurry. You can cheat by scaling down a text element with a larger font size.</li>
+		</ul>
+
+		<h5>Final optimizations for deployment:</h5>
+		<ul>
+			<li>Make sure images are optimized for weight (the toolkit creates non-optimized JPEGs and PNGs).</li>
+			<li>Generate an optimized package using: <em>Tools > Pub Deploy</em> in DartEditor, this will generate a /deploy directory ready to upload with minified Dart and JavaScript code.</li>
 		</ul>
       </div>
 

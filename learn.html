@@ -45,6 +45,7 @@
 			<li>Filters are slow and sparsely supported,</li>
 			<li>Vectors are slow and generate lots of code,</li>
 			<li>You must learn new optimization tricks (see below),</li>
+			<li>Delete all unused assets from your FLAs before publishing (see below),</li>
 			<li>To publish an optimized Dart project for the web, use: <em>Tools > Pub Deploy</em> in DartEditor</li>
 		</ul>
 		<p><em>(seriously, take the time to read what follows)</em></p>
@@ -192,7 +193,8 @@ someChild.gotoAndPlay("anim"); // child instances can be targeted
 
 		<h5>Final optimizations for deployment:</h5>
 		<ul>
-			<li>Make sure PNGs are optimized for weight (the toolkit creates non-optimized PNGs).</li>
+			<li>Delete all unused assets from your FLAs because all embedded images/sounds are exported regardless of their usage,</li>
+			<li>Make sure PNGs are optimized for weight (the toolkit creates non-optimized PNGs),</li>
 			<li>Generate an optimized package using: <em>Tools > Pub Deploy</em> in DartEditor, this will generate a /deploy directory ready to upload with minified Dart and JavaScript code.</li>
 		</ul>
       </div>

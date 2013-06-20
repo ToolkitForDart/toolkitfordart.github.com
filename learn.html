@@ -84,8 +84,8 @@
 			<li>The main timeline and symbols with a class linkage OR present on the timeline are exported as Dart classes,</li>
 			<li>All the embedded images and sounds are exported (and preloaded) regardless of their usage,</li>
 			<li>Sounds are exported as MP3s, </li>
-			<li>Lossy images are exported as JPEGs,</li>
-			<li>Lossless images are combined into PNG atlases (by default and when appropriate) or PNGs,</li>
+			<li>Lossy (non transparent) images are exported as JPEGs respecting image compression options,</li>
+			<li>Lossless and transparent images are combined into PNG atlases (by default and when appropriate) or PNGs,</li>
 			<li>A preloader is generated to easily preload all the images and sounds.</li>
 		</ul>
 
@@ -192,7 +192,7 @@ someChild.gotoAndPlay("anim"); // child instances can be targeted
 
 		<h5>Final optimizations for deployment:</h5>
 		<ul>
-			<li>Make sure images are optimized for weight (the toolkit creates non-optimized JPEGs and PNGs).</li>
+			<li>Make sure PNGs are optimized for weight (the toolkit creates non-optimized PNGs).</li>
 			<li>Generate an optimized package using: <em>Tools > Pub Deploy</em> in DartEditor, this will generate a /deploy directory ready to upload with minified Dart and JavaScript code.</li>
 		</ul>
       </div>

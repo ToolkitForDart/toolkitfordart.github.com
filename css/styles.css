@@ -1,6 +1,5 @@
 body {
-	padding-top:10px;
-	padding-bottom: 20px;
+	padding:10px 20px;
 }
 
 .container-narrow {
@@ -10,6 +9,8 @@ body {
 .container-narrow > hr {
 	margin: 20px 0;
 }
+
+.topnav .nav { display:inline-block; float:left; margin:2px 5px 0 0; }
 
 /* HOME */
 
@@ -70,8 +71,8 @@ body {
 
 /* RESPONSIVE */
 
-@media (max-width: 1023px) {
-	.pull-right { float:none; }	
+@media (max-width: 1160px) {
+	.topnav { float:none; }	
 }
 
 @media (max-width: 900px) {
@@ -97,4 +98,5 @@ body {
 @media (max-width: 530px) {
 	.actions .btn-learn { display:none; }
 	.forkme { display:none; }
+	.btn-community { float:right; }
 }

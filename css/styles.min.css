@@ -1,4 +1,4 @@
-body{padding-top:10px;padding-bottom:20px;}
+body{padding:10px 20px;}
 .container-narrow{margin:0 auto;max-width:900px;}
 .container-narrow>hr{margin:20px 0;}
 .jumbotron{margin:20px 0;text-align:center;}
@@ -9,6 +9,7 @@ body{padding-top:10px;padding-bottom:20px;}
 .actions .btn-demo{margin-top:40px;}
 .play{text-align:center;}
 .play a{background:#fff;border-radius:5px;padding:2px 8px;opacity:0.8;}
+.topnav .nav{display:inline-block;float:left;margin:2px 5px 0 0;}
 .marketing{}
 .marketing h4{margin-top:28px;}
 .marketing .logos{text-align:center;}
@@ -20,7 +21,7 @@ body{padding-top:10px;padding-bottom:20px;}
 .steps .span4{padding-bottom:10px;}
 .faq h4{margin-top:28px;}
 .learn h4{margin-top:28px;}
-@media (max-width:1023px){.pull-right{float:none;}}
+@media (max-width:1160px){.topnav{float:none;}}
 @media (max-width:900px){.actions{background-size:900px;height:172px;}}
 @media (max-width:767px){.jumbotron h1{font-size:36px;padding:0 0;}
 .jumbotron .lead{font-size:20px;padding:0 0;}
@@ -30,4 +31,5 @@ body{padding-top:10px;padding-bottom:20px;}
 .video{padding:10px 0px;}
 .video iframe{width:480px;height:320px;}}
 @media (max-width:530px){.actions .btn-learn{display:none;}
-.forkme{display:none;}}
+.forkme{display:none;}
+.btn-community{float:right;}}

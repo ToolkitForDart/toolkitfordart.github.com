@@ -11,6 +11,7 @@ body {
 }
 
 .topnav .nav { display:inline-block; float:left; margin:2px 5px 0 0; }
+.btn-community img { width:29px; height:29px; }
 
 /* HOME */
 

@@ -10,6 +10,7 @@ body {
 	margin: 20px 0;
 }
 
+.topnav { width:500px; }
 .topnav .nav { display:inline-block; float:left; margin:2px 5px 0 0; }
 .btn-community img { width:29px; height:29px; }
 
@@ -99,5 +100,6 @@ body {
 @media (max-width: 530px) {
 	.actions .btn-learn { display:none; }
 	.forkme { display:none; }
+	.topnav { width:400px; padding-bottom:10px; }
 	.btn-community { float:right; }
 }

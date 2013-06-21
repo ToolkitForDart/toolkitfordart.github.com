@@ -9,6 +9,7 @@ body{padding:10px 20px;}
 .actions .btn-demo{margin-top:40px;}
 .play{text-align:center;}
 .play a{background:#fff;border-radius:5px;padding:2px 8px;opacity:0.8;}
+.topnav{width:500px;}
 .topnav .nav{display:inline-block;float:left;margin:2px 5px 0 0;}
 .btn-community img {width:29px;height:29px;}
 .marketing{}
@@ -33,4 +34,5 @@ body{padding:10px 20px;}
 .video iframe{width:480px;height:320px;}}
 @media (max-width:530px){.actions .btn-learn{display:none;}
 .forkme{display:none;}
+.topnav{width:400px;padding-bottom:10px;}
 .btn-community{float:right;}}

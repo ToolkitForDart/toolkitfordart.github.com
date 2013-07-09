@@ -44,6 +44,7 @@
 		<p>This is no magic; some things work, some don’t:</p>
 		<ul>
 			<li>ActionScript code is not converted, but there's a trick to add Dart code in frame actions,</li>
+			<li>Read <a href="http://www.stagexl.org/docs/actionscript-dart.html">ActionScript to Dart quick-start</a>,</li>
 			<li>Images are pretty fast,</li>
 			<li>Filters are slow and sparsely supported,</li>
 			<li>Vectors are slow and generate lots of code,</li>
@@ -77,7 +78,7 @@
 			<li>Don't break text appart and use web fonts (no support for font embedding).</li>
 			<li>PNGs are automatically combined into atlases, unless they are too large or contain "@1x" in their name (see toolkit panel settings),</li>
 			<li>Images ending with @1x.png are automatically substitued by @2x.png when the canvas is high-dpi,</li>
-			<li>For mobile you may want to disable the high-dpi canvas: set <code>Stage.autoHighDpi = false;</code> before creating the stage instance.</li>
+			<li>For mobile you may want to disable the high-dpi canvas: <code>if (Stage.isMobile) Stage.autoHighDpi = false;</code> before creating the stage instance.</li>
 		</ul>
 		
 		<h4 id="howitworks">How does the toolkit work</h4>
@@ -86,10 +87,14 @@
 		<h5>About the generated symbols library:</h5>
 		<ul>
 			<li>The main timeline and symbols with a class linkage OR present on the timeline are exported as Dart classes,</li>
-			<li>All the embedded images and sounds are exported (and preloaded) regardless of their usage,</li>
-			<li>Sounds are exported as MP3s, </li>
-			<li>Lossy (non transparent) images are exported as JPEGs respecting image compression options,</li>
-			<li>Lossless and transparent images are combined into PNG atlases (by default and when appropriate) or PNGs,</li>
+			<li>All the embedded images and sounds are exported (and preloaded) regardless of their usage,
+			<ul>
+				<li>Exclude images from output by adding <code>!</code> at the beginning of the symbol name (ex: SomeImage -> !SomeImage),</li>
+				<li>Sounds are always exported as MP3s, but StageXL will try loading .ogg and .wav depending on browser support,</li>
+				<li>Lossy (non transparent) images are exported as JPEGs respecting image compression options,</li>
+				<li>Lossless and transparent images are combined into PNG atlases (by default and when appropriate) or PNGs,</li>
+			</ul>
+			</li>
 			<li>A preloader is generated to easily preload all the images and sounds.</li>
 		</ul>
 
@@ -124,6 +129,12 @@ gotoAndPlay(0);                // frames index start at 0
 someChild.gotoAndPlay("anim"); // child instances can be targeted
 */
 </pre>
+
+		<h5>Geometry changes:</h5>
+		<ul>
+			<li>Symbol instances's position (<code>.x</code>, <code>.y</code>) corresponds to the transformation point in Flash Pro and can differ from the actual registration point,</li>
+			<li>The trick is that you can modify the registration point of a symbol using the <code>.pivotX</code> / <code>.pivotY</code> properties.</li>
+		</ul>
 
 		<h5>MovieClip differences compared to Flash:</h5>
 		<ul>
@@ -162,6 +173,11 @@ someChild.gotoAndPlay("anim"); // child instances can be targeted
 		<ul>
 			<li>The images exported by the toolkit are not optimized, it is important to take care of optimizing them before deploying using tools like <a href="http://pngquant.org/">pngquant</a> which can reduce a PNG's size by 50-75%.</li>
 			<li>Don't hesitate to use lots of PNGs as those are combined into atlases (spritesheets).</li>
+			<li>If the atlases don't look good (after quantization):
+				<ul>
+					<li>you can reduce the maximum atlas size to create more atlases which will require less colours,</li>
+					<li>you can exclude some PNGs from the atlas by adding <code>_</code> or <code>=</code> at the beginning of the symbol name (ex: SomeImage -> _SomeImage)</li>
+				</ul></li>
 		</ul>
 
 		<h5>Optimizing Shapes output:</h5>
